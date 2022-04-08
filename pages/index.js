@@ -2,6 +2,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { AiOutlinePlus } from "react-icons/ai";
 
 import Header from '../components/Header.js'
+import BuyTokens from '../components/BuyTokens.js'
 
 
 const styles = {
@@ -58,7 +59,7 @@ export default function Home() {
               <div className={styles.noticeMessage}>
                 Transfer your funds here
               </div>
-              {/* <BuyTokens /> */}
+              <BuyTokens />
             </div>
           </div>
           {/* <Notice /> */}
