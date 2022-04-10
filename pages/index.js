@@ -3,6 +3,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 
 import Header from '../components/Header.js'
 import BuyTokens from '../components/BuyTokens.js'
+import Notice from '../components/Notice.js'
 
 
 const styles = {
@@ -62,7 +63,7 @@ export default function Home() {
               <BuyTokens />
             </div>
           </div>
-          {/* <Notice /> */}
+          <Notice />
         </div>
         <div className={styles.rightMain}>
           <div className={styles.rightMainItem}>
