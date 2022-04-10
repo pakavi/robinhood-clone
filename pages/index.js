@@ -4,6 +4,7 @@ import { AiOutlinePlus } from "react-icons/ai";
 import Header from '../components/Header.js'
 import BuyTokens from '../components/BuyTokens.js'
 import Notice from '../components/Notice.js'
+import Assets from '../components/Assets.js'
 
 
 const styles = {
@@ -70,8 +71,8 @@ export default function Home() {
             <div className={styles.ItemTitle}>Crypto Currencies</div>
             <BiDotsHorizontalRounded className={styles.moreOptions} />
           </div>
-          {/* Map through coins */}
-          {/* <Asset /> */}
+          <Assets coin={"BTC"} price={0.89} />
+          <Assets coin={"ETH"} price={0.64} />
           <div className={styles.rightMainItem}>
             <div className={styles.ItemTitle}>Lists</div>
             <AiOutlinePlus className={styles.moreOptions} />
