@@ -1,6 +1,8 @@
+import { useContext } from "react";
 import Image from "next/image";
 
 import { AiOutlineSearch } from "react-icons/ai";
+import { RobinhoodContext } from "../context/RobinhoodContext.js";
 
 import logo from "../assets/logo.png";
 
@@ -19,10 +21,16 @@ const styles = {
   menuItem: "cursor-pointer font-bold hover:text-green-500 duration-300",
 };
 
-const isAuthenticated = false;
-const formattedAccount = "0x1C8...f42";
 
 const Header = () => {
+  const {
+    connectWallet,
+    signout,
+    currentAccount,
+    isAuthenticated,
+    formattedAccount,
+  } = useContext(RobinhoodContext);
+
   return (
     <div className={styles.container}>
       <div className={styles.leftHeader}>
@@ -49,7 +57,7 @@ const Header = () => {
         {isAuthenticated && (
           <>
             <div className={styles.menuItem}>{formattedAccount}</div>
-            <div className={styles.menuItem} onClick={() => connectWallet()}>
+            <div className={styles.menuItem} onClick={() => signout()}>
               Logout
             </div>
           </>
