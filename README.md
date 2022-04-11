@@ -1,6 +1,6 @@
 # Robinhood Clone
 
-Robinhood clone w/ reactjs, nextjs, sanity, alchemy, web3 and metamask
+Robinhood clone w/ reactjs, nextjs, sanity, moralis, web3 and metamask
 
 **Credits:** Clever Programmer
 
@@ -9,7 +9,7 @@ Robinhood clone w/ reactjs, nextjs, sanity, alchemy, web3 and metamask
 
 **Client:** React, Next JS, Tailwind CSS
 
-**Server:** Node, Sanity, Alchemy, Web3, Metamask
+**Server:** Node, Sanity, Moralis, Web3, Metamask
 
 ## Screenshots
 
