@@ -1,15 +1,8 @@
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 
+import { styles } from './Assets.styles.js'
 
-const styles = {
-  wrapper: "flex justify-between p-5  hover:bg-[#30363B] duration-300",
-  container: "flex flex-col text-white items-center justify-center",
-  name: "font-bold",
-  chart: "w-36 h-full",
-  price: "flex flex-col text-white",
-  percent: "text-green-400",
-};
 
 const Assets = ({ coin, price }) => {
   const randomNumber = () => {
