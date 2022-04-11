@@ -8,7 +8,6 @@ const serverUrl = process.env.MORALIS_SERVER_URL
 const appId = process.env.MORALIS_APP_ID 
 
 function MyApp({ Component, pageProps }) {
-
   return (
     <MoralisProvider
       serverUrl={serverUrl}
