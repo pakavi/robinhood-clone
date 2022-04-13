@@ -12,6 +12,7 @@ import {
   usdcAddress,
 } from "../lib/constants.js";
 
+
 export const RobinhoodContext = createContext();
 
 export const RobinhoodProvider = ({ children }) => {
@@ -26,7 +27,7 @@ export const RobinhoodProvider = ({ children }) => {
   const { isAuthenticated, authenticate, user, logout, Moralis, enableWeb3 } =
     useMoralis();
 
-
+    
   useEffect(async () => {
     if (isAuthenticated) {
       const account = user.get("ethAddress");
