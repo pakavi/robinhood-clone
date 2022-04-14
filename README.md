@@ -11,6 +11,7 @@ Robinhood clone w/ reactjs, nextjs, sanity, moralis, web3 and metamask
 
 **Server:** Node, Sanity, Moralis, Web3, Metamask
 
-❗Need to fix some issues
+✅ finished working project
 
 ## Screenshots
+![App Screenshot](https://i.postimg.cc/Dz5BxcVH/2022-04-14-10-17-34.png)
