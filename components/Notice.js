@@ -1,4 +1,4 @@
-import { styles } from './Notice.styles.js'
+import { styles } from "./Notice.styles.js";
 
 
 const Notice = () => {
@@ -8,7 +8,7 @@ const Notice = () => {
         <div className={styles.noticeTitle}>Fund Your Account</div>
         <div className={styles.noticeMessage}>
           Your bank account is ready! Fund your Robinhood account to begin
-          trading
+          trading.
         </div>
       </div>
       <div className={styles.noticeCTA}>Add Funds</div>

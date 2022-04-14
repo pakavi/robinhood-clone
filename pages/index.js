@@ -18,7 +18,7 @@ import { styles } from "./index.styles.js";
 
 export default function Home({ coins }) {
   const [myCoins] = useState([...coins.slice(0, 15)])
-  const { balance, swapError } = useContext(RobinhoodContext)
+  const { balance } = useContext(RobinhoodContext)
 
   return (
     <div className={styles.wrapper}>

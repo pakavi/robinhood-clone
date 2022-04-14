@@ -14,7 +14,7 @@ const swapTokens = async (req, res) => {
     };
 
     await client.createIfNotExists(txDoc);
-    res.status(201).send({ message: 'success' });
+    res.status(201).send({ message: "success" });
   } catch (err) {
     console.error(err);
     res.status(500).send({ message: "error", data: err.message });
