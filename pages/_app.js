@@ -2,6 +2,7 @@ import { RobinhoodProvider } from "../context/RobinhoodContext.js";
 import { MoralisProvider } from "react-moralis";
 
 import "../styles/globals.css";
+import '../styles/Home.module.css';
 
 
 const serverUrl = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;

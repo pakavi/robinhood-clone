@@ -12,44 +12,65 @@ const BuyTokens = () => {
     mint,
     setCoinSelect,
     coinSelect,
-    toCoin,
     amount,
+    toCoin,
     setToCoin,
   } = useContext(RobinhoodContext);
 
   return (
     <form className={styles.formContainer}>
-      <div className="flex flex-col h-full w-full items-center">
+      <div className="flex h-full w-full flex-col items-center">
         <select
-          className={styles.left}
+          className={styles.select}
           value={coinSelect}
           onChange={(e) => setCoinSelect(e.target.value)}
         >
-          <option className={styles.options}>BTC</option>
-          <option className={styles.options}>DOGE</option>
-          <option className={styles.options}>ETH</option>
-          <option className={styles.options}>SOL</option>
-          <option className={styles.options}>USDC</option>
+          <option className={styles.options} value="ETH">
+            ETH
+          </option>
+          <option className={styles.options} value="DOGE">
+            DOGE
+          </option>
+          <option className={styles.options} value="USDC">
+            USDC
+          </option>
+          <option className={styles.options} value="LINK">
+            LINK
+          </option>
+          <option className={styles.options} value="DAI">
+            DAI
+          </option>
         </select>
         <select
-          className={styles.left}
+          className={styles.select}
           value={toCoin}
           onChange={(e) => setToCoin(e.target.value)}
         >
-          <option className={styles.options}>BTC</option>
-          <option className={styles.options}>DOGE</option>
-          <option className={styles.options}>ETH</option>
-          <option className={styles.options}>SOL</option>
-          <option className={styles.options}>USDC</option>
+          <option className={styles.options} value="DOGE">
+            DOGE
+          </option>
+          <option className={styles.options} value="USDC">
+            USDC
+          </option>
+          <option className={styles.options} value="LINK">
+            LINK
+          </option>
+          <option className={styles.options} value="DAI">
+            DAI
+          </option>
         </select>
         <input
+          placeholder="Amount..."
           className={styles.inputAmount}
           type="text"
-          placeholder="Amount..."
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
         />
+
         <button
           className={styles.noticeCTA}
           type="button"
+          disabled={!isAuthenticated}
           onClick={() => mint()}
         >
           Send

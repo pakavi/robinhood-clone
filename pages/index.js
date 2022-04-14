@@ -17,8 +17,8 @@ import { styles } from "./index.styles.js";
 
 
 export default function Home({ coins }) {
-  const [myCoins] = useState([...coins.slice(0, 15)]);
-  const { balance } = useContext(RobinhoodContext);
+  const [myCoins] = useState([...coins.slice(0, 15)])
+  const { balance, swapError } = useContext(RobinhoodContext)
 
   return (
     <div className={styles.wrapper}>
@@ -28,7 +28,8 @@ export default function Home({ coins }) {
           <div className={styles.portfolioAmountContainer}>
             <div className={styles.portfolioAmount}>{balance} ETH</div>
             <div className={styles.portfolioPercent}>
-              +0.0008(+0.57%) <span className={styles.pastHour}>Past Hour</span>
+              +0.0008(+0.57%)
+              <span className={styles.pastHour}>Past Hour</span>
             </div>
           </div>
           <div>
@@ -42,9 +43,9 @@ export default function Home({ coins }) {
           </div>
           <div className={styles.notice}>
             <div className={styles.noticeContainer}>
-              <div className={styles.noticeTitle}>Sends Funds</div>
+              <div className={styles.noticeTitle}>Send Funds</div>
               <div className={styles.noticeMessage}>
-                Transfer your funds here
+                Transfer your funds here.
               </div>
               <BuyTokens />
             </div>
@@ -56,11 +57,10 @@ export default function Home({ coins }) {
             <div className={styles.ItemTitle}>Crypto Currencies</div>
             <BiDotsHorizontalRounded className={styles.moreOptions} />
           </div>
-          {myCoins.map((coin) => {
-            let price = parseFloat(coin.price);
-            price = price.toFixed(2);
-
-            return <Assets key={coin.uuid} coin={coin} price={price} />;
+          {myCoins.map(coin => {
+            let price = parseFloat(coin.price)
+            price = price.toFixed(2)
+            return <Assets key={coin.uuid} coin={coin} price={price} />
           })}
           <div className={styles.rightMainItem}>
             <div className={styles.ItemTitle}>Lists</div>
@@ -69,33 +69,32 @@ export default function Home({ coins }) {
         </div>
       </div>
     </div>
-  );
+  )
 }
-
 
 export const getStaticProps = async () => {
   const options = {
-    method: "GET",
-    url: "https://coinranking1.p.rapidapi.com/coins",
+    method: 'GET',
+    url: 'https://coinranking1.p.rapidapi.com/coins',
     params: {
-      referenceCurrencyUuid: "yhjMzLPhuIDl",
-      timePeriod: "24h",
-      tiers: "1",
-      orderBy: "marketCap",
-      orderDirection: "desc",
-      limit: "50",
-      offset: "0",
+      referenceCurrencyUuid: 'yhjMzLPhuIDl',
+      timePeriod: '24h',
+      tiers: '1',
+      orderBy: 'marketCap',
+      orderDirection: 'desc',
+      limit: '50',
+      offset: '0',
     },
     headers: {
-      "X-RapidAPI-Host": process.env.COIN_RANKING_HOST,
-      "X-RapidAPI-Key": process.env.COIN_RANKING_KEY,
+      'X-RapidAPI-Host': process.env.COIN_RANKING_HOST,
+      'X-RapidAPI-Key': process.env.COIN_RANKING_KEY,
     },
-  };
+  }
 
-  const res = await axios.request(options);
-  const coins = res.data.data.coins;
+  const res = await axios.request(options)
+  const coins = res.data.data.coins
 
   return {
     props: { coins },
-  };
-};
+  }
+}
