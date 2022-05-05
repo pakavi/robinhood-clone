@@ -2,9 +2,6 @@
 
 Robinhood clone w/ reactjs, nextjs, sanity, moralis, web3 and metamask
 
-**Credits:** Clever Programmer
-
-
 ## Tech Stack
 
 **Client:** React, Next JS, Tailwind CSS
