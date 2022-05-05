@@ -16,42 +16,55 @@ import {
 export const RobinhoodContext = createContext();
 
 export const RobinhoodProvider = ({ children }) => {
-  const [currentAccount, setCurrentAccount] = useState("");
   const [formattedAccount, setFormattedAccount] = useState("");
-
+  const [currentAccount, setCurrentAccount] = useState("");
   const [coinSelect, setCoinSelect] = useState("DOGE");
-  const [toCoin, setToCoin] = useState("");
+
   const [balance, setBalance] = useState("");
+  const [toCoin, setToCoin] = useState("");
   const [amount, setAmount] = useState("");
 
   const { isAuthenticated, authenticate, user, logout, Moralis, enableWeb3 } =
-    useMoralis();
+  useMoralis();
+  
+  const { Units, Web3API } = Moralis;
 
 
   useEffect(() => {
-    if (isAuthenticated) {
+    const fetchData = async () => {
       const account = user.get("ethAddress");
       let formatAccount = account.slice(0, 4) + "..." + account.slice(-4);
 
       setFormattedAccount(formatAccount);
       setCurrentAccount(account);
 
-      const currentBalance = Moralis.Web3API.account.getNativeBalance({
+      const currentBalance = await Web3API.account.getNativeBalance({
         chain: "rinkeby",
         address: currentAccount,
       });
-      const balanceToEth = Moralis.Units.FromWei(currentBalance.balance);
-      const formattedBalance = parseFloat(balanceToEth).toFixed(3);
 
-      setBalance(formattedBalance);
-    }
-  }, [isAuthenticated, enableWeb3]);
+      if (isAuthenticated) {
+        const balanceToEth = Units.FromWei(currentBalance.balance);
+        const formattedBalance = parseFloat(balanceToEth).toFixed(3);
+        setBalance(formattedBalance);
+      }
+    };
+
+    fetchData();
+  }, [
+    isAuthenticated,
+    currentAccount,
+    user,
+    enableWeb3,
+    Units,
+    Web3API.account,
+  ]);
 
   useEffect(() => {
     if (!currentAccount) return;
 
     (async () => {
-      const response = fetch("/api/createUser", {
+      const response = await fetch("/api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -60,9 +73,12 @@ export const RobinhoodProvider = ({ children }) => {
           walletAddress: currentAccount,
         }),
       });
+
+      const data = await response.json();
     })();
   }, [currentAccount]);
 
+  
   const getContractAddress = () => {
     if (coinSelect === "DAI") return daiAddress;
     if (coinSelect === "DOGE") return dogeAddress;
@@ -84,6 +100,7 @@ export const RobinhoodProvider = ({ children }) => {
     if (toCoin === "USDC") return usdcAbi;
   };
 
+
   const mint = async () => {
     try {
       if (coinSelect === "ETH") {
@@ -102,10 +119,11 @@ export const RobinhoodProvider = ({ children }) => {
             amount: Moralis.Units.Token("50", "18"),
           },
         };
-        sendEth();
 
+        sendEth();
         const transaction = await Moralis.executeFunction(options);
-        const receipt = await transaction.wait(4);
+        const receipt = await transaction.wait(4)
+
         saveTransaction(receipt.transactionHash, amount, receipt.to);
       } else {
         swapTokens();
@@ -119,9 +137,10 @@ export const RobinhoodProvider = ({ children }) => {
   const swapTokens = async () => {
     try {
       if (!isAuthenticated) return;
-      if (coinSelect === toCoin) return;
 
       await Moralis.enableWeb3();
+
+      if (coinSelect === toCoin) return;
 
       const fromOptions = {
         type: "erc20",
@@ -142,20 +161,18 @@ export const RobinhoodProvider = ({ children }) => {
 
       let fromTransaction = await Moralis.transfer(fromOptions);
       let toMintTransaction = await Moralis.executeFunction(toMintOptions);
-      
       let fromReceipt = await fromTransaction.wait();
       let toReceipt = await toMintTransaction.wait();
-      console.log(fromReceipt);
-      console.log(toReceipt);
     } catch (err) {
       console.error(err.message);
     }
   };
 
+
   const sendEth = async () => {
     if (!isAuthenticated) return;
-
     const contractAddress = getToAddress();
+
     let options = {
       type: "native",
       amount: Moralis.Units.ETH("0.01"),
@@ -164,13 +181,12 @@ export const RobinhoodProvider = ({ children }) => {
 
     const transaction = await Moralis.transfer(options);
     const receipt = await transaction.wait();
-    console.log(receipt);
 
     saveTransaction(receipt.transactionHash, "0.01", receipt.to);
   };
 
   const saveTransaction = async (txHash, amount, toAddress) => {
-    await fetch("/api/swapTokens", {
+    await fetch("/api/swap", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -188,7 +204,8 @@ export const RobinhoodProvider = ({ children }) => {
     authenticate();
   };
 
-  const signout = () => {
+  const signOut = () => {
+    console.log("Logged out");
     logout();
   };
 
@@ -197,7 +214,7 @@ export const RobinhoodProvider = ({ children }) => {
       value={{
         connectWallet,
         currentAccount,
-        signout,
+        signOut,
         isAuthenticated,
         formattedAccount,
         setAmount,
