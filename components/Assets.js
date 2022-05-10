@@ -1,7 +1,7 @@
 import { Line } from "react-chartjs-2";
-import Chart from "chart.js/auto";
+import Chart from 'chart.js/auto';
 
-import { styles } from './Assets.styles.js'
+import { styles } from "./Assets.styles.js";
 
 
 const Assets = ({ coin, price }) => {
@@ -63,14 +63,14 @@ const Assets = ({ coin, price }) => {
       </div>
       <div>
         <div className={styles.chart}>
-          <Line data={data} options={options} width={400} height={400} />
+          <Line data={data} options={options} width={400} height={150} />
         </div>
       </div>
       <div className={styles.price}>
         <div>{price}</div>
         <div
           className={styles.percent}
-          style={{ color: coin.change > 0 ? "#ef4b09" : "green" }}
+          style={{ color: coin.change < 0 ? "#ef4b09" : "green" }}
         >
           {coin.change}%
         </div>

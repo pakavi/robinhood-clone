@@ -66,7 +66,6 @@ const BuyTokens = () => {
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />
-
         <button
           className={styles.noticeCTA}
           type="button"

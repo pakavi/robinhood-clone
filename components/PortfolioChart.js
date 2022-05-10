@@ -1,4 +1,5 @@
 import { Line } from "react-chartjs-2";
+import Chart from "chart.js/auto";
 
 
 const data = {
@@ -46,10 +47,12 @@ const options = {
   },
 };
 
-import React from "react";
-
 const PortfolioChart = () => {
-  return <Line data={data} options={options} width={400} height={150} />;
+  return (
+    <>
+      <Line data={data} options={options} width={400} height={150} />
+    </>
+  );
 };
 
 export default PortfolioChart;

@@ -6,45 +6,43 @@ import { RobinhoodContext } from "../context/RobinhoodContext.js";
 
 import logo from "../assets/logo.png";
 
-import { styles } from './Header.styles.js'
+import { styles } from "./Header.styles.js";
 
 
 const Header = () => {
   const {
     connectWallet,
-    signout,
+    signOut,
     currentAccount,
     isAuthenticated,
     formattedAccount,
+    swapTokens,
   } = useContext(RobinhoodContext);
 
   return (
     <div className={styles.container}>
       <div className={styles.leftHeader}>
-        <Image className={styles.logo} src={logo} height={100} width={100} />
+        <Image src={logo} alt="Logo" height={100} width={100} className={styles.logo} />
       </div>
       <div className={styles.searchWrapper}>
         <div className={styles.searchInputContainer}>
           <AiOutlineSearch className={styles.searchIcon} />
           <div className={styles.searchInputWrapper}>
-            <input
-              className={styles.searchInput}
-              type="text"
-              placeholder="Search..."
-            />
+            <input placeholder="Search..." className={styles.searchInput} />
           </div>
         </div>
       </div>
       <div className={styles.rightHeader}>
-        <div className={styles.menuItem}>Rewards</div>
+        <div className={styles.menuItem} onClick={swapTokens}>
+          Rewards
+        </div>
         <div className={styles.menuItem}>Portfolio</div>
         <div className={styles.menuItem}>Cash</div>
         <div className={styles.menuItem}>Messages</div>
-
         {isAuthenticated && (
           <>
             <div className={styles.menuItem}>{formattedAccount}</div>
-            <div className={styles.menuItem} onClick={() => signout()}>
+            <div className={styles.menuItem} onClick={() => signOut()}>
               Logout
             </div>
           </>
